@@ -5,9 +5,15 @@
       <div class="row">
         <b-card  class="col col-md-6" bg-variant="dark" text-variant="white" title="Javascript Drum Kit">
           <p class="card-text">
-            Build a drum kit and play it using keyboard keys
+            Build a drum kit and play it using keyboard keys.
           </p>
-          <b-button :click="navigateTo({ name: 'DrumMachine' })" href="#" variant="primary">View</b-button>
+          <b-button :click="navigateTo({ name: 'DayOne' })" href="#" variant="primary">View</b-button>
+        </b-card>
+        <b-card  class="col col-md-6" bg-variant="dark" text-variant="white" title="Javascript Drum Kit">
+          <p class="card-text">
+            Local Tapas: Learning Local Storage and Event Delegation.
+          </p>
+          <b-button :click="navigateTo({ name: 'DayFifteen' })" href="#" variant="primary">View</b-button>
         </b-card>
       </div>
     </div>

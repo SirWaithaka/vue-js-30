@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '@/components/Home'
-import DrumMachine from '@/components/JsThirty/DrumMachine'
+import DayOne from '@/components/JsThirty/DayOne'
+import DayFifteen from '@/components/JsThirty/DayFifteen'
 
 Vue.use(Router)
 
@@ -16,8 +17,13 @@ export default new Router({
     },
     {
       path: '/drum',
-      name: 'DrumMachine',
-      component: DrumMachine
+      name: 'DayOne',
+      component: DayOne
+    },
+    {
+      path: '/local-tapas',
+      name: 'DayFifteen',
+      component: DayFifteen
     }
   ]
 })
