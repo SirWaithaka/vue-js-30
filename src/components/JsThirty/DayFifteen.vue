@@ -3,11 +3,15 @@
     <div class="dynamic-card mt-5">
       <h1 class="h3 py-2 text-center">LOCAL TAPAS</h1>
       <ul class="plates p-0 m-0">
-        <li></li>
+        <li v-for="(plate, index) in $store.state.items" :key="plate.id">
+          <input v-if="plate.done" type="checkbox" :data-index="index" :id="'item' + index" checked/>
+          <input v-else type="checkbox" :data-index="index" :id="'item' + index" />
+          <label :for="'item' + index">{{ plate.text }}</label>
+        </li>
       </ul>
-      <b-form class="form-tapas add-items">
+      <b-form v-on:submit="addItem" class="form-tapas add-items">
         <b-input-group size="sm">
-          <b-form-input placeholder="Item Name"></b-form-input>
+          <b-form-input name="item" placeholder="Item Name"></b-form-input>
           <b-input-group-append>
             <b-btn type="submit" variant="outline-primary">+ Add Item</b-btn>
           </b-input-group-append>
@@ -19,6 +23,24 @@
 
 <script>
 export default {
+  data () {
+    return {
+      addItems: document.querySelector('.add-items'),
+      itemsList: document.querySelector('.plates')
+    }
+  },
+  methods: {
+    addItem (e) {
+      e.preventDefault()
+      const text = (e.target.querySelector('[name="item"]')).value
+      const item = {
+        text,
+        done: false
+      }
+      this.$store.dispatch('addItem', item)
+      console.log(this.$store.state.items)
+    }
+  }
 }
 </script>
 
