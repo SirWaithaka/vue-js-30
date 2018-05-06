@@ -38,7 +38,13 @@ export default {
         done: false
       }
       this.$store.dispatch('addItem', item)
-      console.log(this.$store.state.items)
+      localStorage.setItem('items', JSON.stringify(this.$store.state.items))
+    }
+  },
+  beforeCreate () {
+    const lsItems = localStorage.getItem('items')
+    if (lsItems !== null) {
+      this.$store.dispatch('initItems', JSON.parse(lsItems))
     }
   }
 }
