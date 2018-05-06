@@ -10,12 +10,18 @@ export default new Vuex.Store({
   },
   actions: {
     addItem ({commit}, item) {
-      commit('ADDITEM', item)
+      commit('ADD_ITEM', item)
+    },
+    initItems ({commit}, items) {
+      commit('INIT_ITEMS', items)
     }
   },
   mutations: {
-    ADDITEM (state, payload) {
+    ADD_ITEM (state, payload) {
       state.items.push(payload)
+    },
+    INIT_ITEMS (state, payload) {
+      state.items = payload
     }
   }
 })
