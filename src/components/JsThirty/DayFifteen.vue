@@ -2,7 +2,7 @@
   <div class="bg-dark wrapper">
     <div class="dynamic-card mt-5">
       <h1 class="h3 py-2 text-center">LOCAL TAPAS</h1>
-      <ul class="plates p-0 m-0">
+      <ul class="plates p-0 m-0" v-on:click="toggleDone">
         <li v-for="(plate, index) in $store.state.items" :key="plate.id">
           <input v-if="plate.done" type="checkbox" :data-index="index" :id="'item' + index" checked/>
           <input v-else type="checkbox" :data-index="index" :id="'item' + index" />
@@ -11,7 +11,7 @@
       </ul>
       <b-form v-on:submit="addItem" class="form-tapas add-items">
         <b-input-group size="sm">
-          <b-form-input name="item" placeholder="Item Name"></b-form-input>
+          <b-form-input type="text" name="item" placeholder="Item Name"></b-form-input>
           <b-input-group-append>
             <b-btn type="submit" variant="outline-primary">+ Add Item</b-btn>
           </b-input-group-append>
@@ -23,21 +23,26 @@
 
 <script>
 export default {
-  data () {
-    return {
-      addItems: document.querySelector('.add-items'),
-      itemsList: document.querySelector('.plates')
-    }
-  },
   methods: {
     addItem (e) {
       e.preventDefault()
       const text = (e.target.querySelector('[name="item"]')).value
+      // prevent empty imputs
+      if (text === '') return
+
       const item = {
         text,
         done: false
       }
       this.$store.dispatch('addItem', item)
+      localStorage.setItem('items', JSON.stringify(this.$store.state.items))
+      // re-initialize input field to empty string
+      e.target.querySelector('[name="item"]').value = ''
+    },
+    toggleDone (e) {
+      if (!e.target.matches('input')) return
+      const el = e.target
+      this.$store.dispatch('changeItemState', el.dataset.index)
       localStorage.setItem('items', JSON.stringify(this.$store.state.items))
     }
   },
